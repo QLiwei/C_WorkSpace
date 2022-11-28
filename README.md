@@ -52,3 +52,11 @@ git config commit.template .git_template // 当前项目
 易出错，没有可靠的校验方式
 ```
 
+## 3.git命令
+
+```
+git init
+git diff
+git push -u origin master
+```
+
