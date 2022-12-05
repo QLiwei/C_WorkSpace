@@ -31,7 +31,6 @@ extern "C" {
 
 /* Private defines -----------------------------------------------------------*/
 
-
 #ifdef __cplusplus
 }
 #endif

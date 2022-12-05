@@ -15,8 +15,8 @@
  */
 
 /* Includes ------------------------------------------------------------------*/
-#include <stdint.h> // 变量类型重定义
 #include <inttypes.h>
+#include <stdint.h>  // 变量类型重定义
 #include <stdio.h>
 
 /* Private includes ----------------------------------------------------------*/
@@ -28,7 +28,6 @@
 /* Private function prototypes -----------------------------------------------*/
 /* Private user code ---------------------------------------------------------*/
 
-
 /**
  * @brief The application entry point.
  *
@@ -36,8 +35,7 @@
  */
 /// @brief
 /// @return
-int main()
-{
+int main() {
     /**
      * @brief Number type keyword
      *      K&R: int    long    short   unsigned    char    float   double
@@ -155,13 +153,13 @@ int main()
         printf("false!");
     }
 #endif
-/**
- * @brief stdint.h inttypes.h
- *  int32_t
- *  最小宽度类型：
- * int_fast8_t
- *
- */
+    /**
+     * @brief stdint.h inttypes.h
+     *  int32_t
+     *  最小宽度类型：
+     * int_fast8_t
+     *
+     */
 
     /**
      * @brief float double
@@ -191,7 +189,6 @@ int main()
      *      #include <complex.h>
      *
      */
-
 
     return 0;
 }

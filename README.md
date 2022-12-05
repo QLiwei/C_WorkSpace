@@ -1,6 +1,6 @@
-# git commit 代码提交规范
+# 1 git commit 代码提交规范
 
-## 1.commitizen
+## 1.1 commitizen
 
 ```
 格式：
@@ -25,7 +25,7 @@ commitizen 是一个撰写合格 Commit message 的工具，
 遵循 Angular 的提交规范。
 ```
 
-## 2.设置git commit模板
+## 1.2 设置git commit模板
 
 ```
 ( 1 ) 建立模板文件
@@ -52,7 +52,7 @@ git config commit.template .git_template // 当前项目
 易出错，没有可靠的校验方式
 ```
 
-## 3.git命令
+## 1.3 git命令
 
 ```
 git init
@@ -60,3 +60,36 @@ git diff
 git push -u origin master
 ```
 
+# 2.本地代码格式化工具
+
+## 2.1 Clang-format
+
+- windows安装
+
+[Release LLVM 15.0.5 · llvm/llvm-project · GitHub](https://github.com/llvm/llvm-project/releases/tag/llvmorg-15.0.5)
+
+- VSCODE 安装C/C++插件，切换至per-release版本
+
+- 设置C_Cpp:Clang_format_path为clang-format.exe路径
+
+  ```
+  vscode 设置搜索：@ext:ms-vscode.cpptools
+  C_Cpp:Clang_format_path:
+  LLVM\bin\clang-format.exe
+  ```
+
+- 格式化命令
+
+  ```
+  Shift + Alt + F
+  ```
+
+- 保存格式化
+
+  ```shell
+  # setting.json 配置
+  "editor.formatOnSave":ture
+  
+  ```
+
+- 格式化文件插件:Format Files

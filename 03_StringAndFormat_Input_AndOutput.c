@@ -10,17 +10,17 @@
  */
 
 /* Includes ------------------------------------------------------------------*/
-#include <stdio.h>
 #include <stdint.h>
+#include <stdio.h>
 #include <string.h>
 
 /* Private includes ----------------------------------------------------------*/
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
-#define DENSITY (62.4)  // 人体密度
-#define PRAISE "You are an extraordinary being." //你是一个非凡的人
-#define PI (3.1415926)
+#define DENSITY (62.4)                             // 人体密度
+#define PRAISE  "You are an extraordinary being."  // 你是一个非凡的人
+#define PI      (3.1415926)
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
 /* Private function prototypes -----------------------------------------------*/
@@ -31,8 +31,7 @@
  *
  * @return int
  */
-int main()
-{
+int main() {
 #if 0
     float weight, volume;
     int size, letters;
@@ -165,12 +164,12 @@ long string.\n");
  */
 #if 1
     int age;
-    float assets; // 资产
+    float assets;  // 资产
     char pet[30];
 
     printf("Enter your age, assets, and favorite pet.\n");
     scanf("%d %f", &age, &assets);
-    scanf("%s",pet);
+    scanf("%s", pet);
     printf("%d $%.2f %s\n", age, assets, pet);
 #endif
 
