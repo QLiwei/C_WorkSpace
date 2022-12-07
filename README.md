@@ -58,6 +58,33 @@ git config commit.template .git_template // 当前项目
 git init
 git diff
 git push -u origin master
+
+ # 分支、合并历史
+ git log --pretty=format:"%h %s" --graph
+ 
+ # 切换分支
+ git checkout 分支名
+ 
+ # 查看所有分支
+ git branch -a
+ 
+ # 切换至指定commit 切换至当前commit-id之后 git log 看不到之后的提交信息
+ git checkout commit-id
+
+git stash
+git fetch
+git rebase origin/master
+----- 解决冲突
+git add 冲突文件
+git rebase --continue
+-----
+git stash pop
+
+git commit --amend
+
+# 推送commit至远程xx分支
+git push origin 分支名
+
 ```
 
 # 2.本地代码格式化工具
