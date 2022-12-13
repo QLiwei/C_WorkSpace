@@ -215,7 +215,7 @@ int main(void) {
 
 #endif
 
-#if 1
+#if 0
     #define STOP '|'
     char ch;
     char prev;
@@ -253,5 +253,139 @@ int main(void) {
     printf("partial lines = %d\n", p_lines);
 
 #endif
+    /**
+     * @brief 条件运算符
+     *   expression1 ? expression2 : expression2
+     *
+     */
+#if 0
+    #define COVERAGE 350  // 每灌油漆可刷的面积 （单位：平方英尺）
+
+    int sq_feet;
+    int cans;
+
+    printf("Enter number of square feet to be painted:\n");
+    while (scanf("%d", &sq_feet) == 1) {
+        cans = sq_feet / COVERAGE;
+        cans += ((sq_feet % COVERAGE == 0)) ? 0 : 1;
+        printf("You need %d %s of paint.\n", cans, cans == 1 ? "can" : "cans");
+        printf("Enter next value (q to quit):\n");
+    }
+
+#endif
+    /**
+     * @brief continue语句
+     *      在循环语句内，执行到continue语句时，会跳过本次迭代的剩余部分，并开始下一轮迭代
+     */
+
+#if 0
+    const float MIN = 0.0f;
+    const float MAX = 100.0f;
+
+    float score;
+    float total = 0.0f;
+    int n = 0;
+    float min = MAX;
+    float max = MIN;
+
+    printf("Enter the first score (q to quit): ");
+    while (scanf("%f", &score) == 1) {
+        if (score < MIN || score > MAX) {
+            printf("%0.1f is an invalid value. Try again: ", score);
+            continue;
+        }
+        printf("Accpting %0.1f:\n", score);
+        min = (score < min) ? score : min;
+        max = (score > max) ? score : max;
+        total += score;
+        n++;
+        printf("Enter next score (q to quit):");
+    }
+    if (n > 0) {
+        printf("Average of %d scores is %0.1f\n", n, total / n);
+        printf("Low = %0.1f, high = %0.1f\n", min, max);
+    } else {
+        printf("No valid scores were entered.\n");
+    }
+#endif
+/**
+ * @brief break语句
+ *  程序执行到break语句时，会终止包含他的循环，并继续执行下一个阶段
+ */
+#if 0
+    float length, width;
+
+    printf("Enter the length of the rectangle:\n");
+    while (scanf("%f", &length) == 1) {
+        printf("Length = %0.2f:\n", length);
+        printf("Enter its width:\n");
+        if (scanf("%f", &width) != 1) {
+            break;
+        }
+        printf("Width = %0.2f:\n", width);
+        printf("Area = %0.2f:\n", length * width);
+        printf("Enter the length of the rectangle:\n");
+    }
+    printf("Done.\n");
+
+#endif
+/**
+ * @brief switch语句
+ *  程序根据expression的值跳转至相应的case标签处，然后，执行剩下的所有语句，除非执行到break语句
+ * 进行重定向。expression和case标签都必须是整数值（包括char类型），标签必须是常量或完全由常量组成
+ * 的表达式。如果没有case标签与expression的值匹配，控制则转至标由defaul的语句*如果有的话;否则，将
+ * 转至执行紧跟在switch语句后面的语句
+ */
+#if 0
+    char ch;
+    printf("Give me a letter of the alphabet, and I will give ");
+    printf("an animal name\nbeginning with that letter.\n");
+    printf("Please type in a letter; type # to end my act.\n");
+    while ((ch = getchar()) != '#') {
+        if ('\n' == ch) {
+            continue;
+        }
+        if (islower(ch)) {
+            switch (ch) {
+            case 'a':
+                printf("argali, a wild sheep of Asia\n");
+                break;
+
+            case 'b':
+                printf("babirusa, a wild pig of Malay\n");
+                break;
+            case 'c':
+                printf("coati, racoonlike mammal\n");
+                break;
+            case 'd':
+                printf("desman, aquatic, molelike critter\n");
+                break;
+            case 'e':
+                printf("echidna, the apiny anteater\n");
+                break;
+            case 'f':
+                printf("fisher, brownish marten\n");
+                break;
+            default:
+                printf("That's a stumper!\n");
+            }
+        } else {
+            printf("I recognize only lowercase letters.\n");
+        }
+        while (getchar() != '\n') {
+            continue;
+        }
+        printf("Please type another letter or a #.\n");
+    }
+    printf("Bye!\n");
+#endif
+    /**
+     * @brief goto 语句
+     *
+     */
+#if 0
+    
+#endif
+
     return 0;
 }
