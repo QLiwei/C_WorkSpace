@@ -653,3 +653,15 @@ rt_timer + 动词短语的形式表示能够应用于 timer 对象的方法。
 - 将源文件编码统一为 UTF-8
 - 将 TAB 键替换为 4 空格
 - 将每行末尾多余的空格删除，并统一换行符为 ‘\n’
+
+# 4.GCC常用命令
+
+```
+gcc -E hello.c -o hello.i（头文件展开，进行源文件中的宏替换，注释过滤）
+gcc -S hello.i -o hello.s（将源文件编译成汇编文件）（这一阶段耗时最大）
+gcc -c hello.s -o hello.o（将汇编文件转换成二进制文件）
+gcc hello.o -o hello（将二进制文件打包成可执行文件）
+
+
+```
+
