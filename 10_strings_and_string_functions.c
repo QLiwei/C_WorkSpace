@@ -173,7 +173,7 @@ int main(void) {
  * @brief p_and_s.c
  *
  */
-#if 1
+#if 0
     const char *mesg = "Don't be a fool!";
     const char *copy;
 
@@ -181,6 +181,49 @@ int main(void) {
     printf("%s\n", copy);
     printf("mesg = %s; &mesg = %p' value = %p\n", mesg, &mesg, mesg);
     printf("copy = %s; &copy = %p; value = %p\n", copy, &copy, copy);
+#endif
+    /**
+     * @brief gets()
+     *  gets()读取整行输入，直到遇到换行符，存储其余字符，并在这些字符末尾添加一个空字符使其变成一个C字符串
+     *  gets() 只有一个参数，无法检查数组是否装得下输入行 有些编译器会报警告
+     *         输入字符串过长，会导致缓冲区溢出（buffer overflow）
+     */
+#if 0
+    #define STLEN 81
+
+    char words[STLEN];
+
+    puts("Enter a string, please.");
+    gets(words);
+    printf("Your string twice:\n");
+    printf("%s\n", words);
+    puts(words);
+    puts("Done.");
+
+#endif
+    /**
+     * @brief fgets() fputs()
+     *  fgets()
+     *     The second parameter: Specifies the maximum number of characters to read
+     *                          fgets()Will read in n-1 characters, or read to the first newline character encountered
+     *     The third parameter: Specifies the file to read
+     *                  If you're reading from keyboard input. Takes stdin (standard input) as the parameter
+     *
+     */
+#if 1
+    char words[14];
+
+    puts("Enter a string, please.");
+    fgets(words, 14, stdin);
+    printf("Your string twice (puts(), then fputs()):\n");
+    puts(words);
+    fputs(words, stdout);
+    puts("Enter anther string, please.");
+    fgets(words, 14, stdin);
+    printf("Your string twice (puts(), then fputs()):\n");
+    puts(words);
+    fputs(words, stdout);
+    puts("Done.");
 #endif
     return 0;
 }
