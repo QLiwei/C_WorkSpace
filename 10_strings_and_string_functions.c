@@ -24,6 +24,9 @@
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
 /* Private function prototypes -----------------------------------------------*/
+char *s_gets(char *str, int n);
+void put1(const char *string);
+int put2(const char *string);
 /* Private user code ---------------------------------------------------------*/
 
 /**
@@ -210,7 +213,7 @@ int main(void) {
      *                  If you're reading from keyboard input. Takes stdin (standard input) as the parameter
      *
      */
-#if 1
+#if 0
     char words[14];
 
     puts("Enter a string, please.");
@@ -225,5 +228,179 @@ int main(void) {
     fputs(words, stdout);
     puts("Done.");
 #endif
+/**
+ * @brief
+ *
+ */
+#if 0
+    #define STLEN 10
+    char words[STLEN];
+
+    puts("Enter string (empty line to quit):");
+    while (fgets(words, STLEN, stdin) != NULL && words[0] != '\n') {
+        fputs(words, stdout);
+    }
+    puts("Done.");
+
+#endif
+
+#if 0
+    #define STRING_LENGTH 10
+    char words[STRING_LENGTH];
+    int i;
+
+    puts("Enter strings (empty line to quit):");
+    while (fgets(words, STRING_LENGTH, stdin) != NULL && words[0] != '\0') {
+        i = 0;
+        while (words[i] != '\n' && words[i] != '\0') {
+            i++;
+        }
+
+        if (words[i] == '\n') {
+            words[i] = '\0';
+        } else {
+            while (getchar() != '\n') {
+                continue;
+            }
+        }
+        puts(words);
+    }
+    puts("done");
+#endif
+    /**
+     * @brief gets_s()
+     * C11新增gets()
+     * gets_s只从标准输入中读取数据
+     * gets_s()读到换行符，会丢弃它而不是存储它
+     * gets_s()读到最大字符数都没有读到换行符，会执行以下几步
+     *  1.把目标数组中的首字符设置为空字符，读取并丢弃随后输入直至读到换行符或文件结尾，返回空指针
+     *  2.调用依赖实现的“处理函数”，可能会终止或退出程序
+     */
+
+    /**
+     * @brief s_gets()
+     * fgets()函数的一种用法
+     *
+     */
+#if 0
+    char str[10];
+    puts(s_gets(str, 10));
+#endif
+/**
+ * @brief scanf()
+ *  确认输入结束：1.第一个非空白字符作为字符串的开始，以空白字符作为结束
+ *                2.指定长度（%10s）读取10个字符或空白字符
+ */
+#if 0
+    char name1[11], name2[11];
+    int count;
+
+    printf("Please enter 2 names.\n");
+    count = scanf("%5s %10s", name1, name2);
+    printf("I read the %d names %s and %s.\n", count, name1, name2);
+#endif
+/**
+ * @brief puts()
+ *
+ */
+#if 0
+    #define DEF "I am a #define string"
+    char str1[80] = "An array was initialized to me.";
+    const char *str2 = "A pointer was initialized to me.";
+
+    puts("I'm an argument to puts().");
+    puts(DEF);
+    puts(str1);
+    puts(str2);
+    puts(&str1[5]);
+    puts(str2 + 4);
+#endif
+/**
+ * @brief fputs()
+ *
+ */
+#if 0
+    char line[81];
+    while (fgets(line, 81, stdin)) {
+        fputs(line, stdout);
+    }
+
+#endif
+
+/**
+ * @brief printf()
+ *
+ */
+#if 0
+    const char string[20] = "i love you!";
+    printf("%s\n", string);
+    puts(string);
+#endif
+
+    /**
+     * @brief Customize input and output functions
+     *
+     */
+#if 0
+    put1("If I'd as much money");
+    put1(" as I could spend,\n");
+    printf("I count %d characters.\n", put2("I never would cry chairs to mend."));
+#endif
     return 0;
+}
+
+/**
+ * @brief Print a string
+ *
+ * @param string String pointer
+ */
+void put1(const char *string) {
+    while (*string) {
+        putchar(*string++);
+    }
+}
+
+/**
+ * @brief Print a string and break the line
+ *
+ * @param string string String pointer
+ * @return int Number of character
+ */
+int put2(const char *string) {
+    int count = 0;
+    while (*string) {
+        putchar(*string++);
+        count++;
+    }
+    putchar('\n');
+
+    return count;
+}
+/**
+ * @brief If a newline character appears in the string, replace it with a space. When a null character occurs, the
+ * remaining characters on the line to be entered are discarded
+ *
+ * @param str String pointer
+ * @param n Reading string length
+ * @return char*
+ * @retval NULL Read to end of file or a read error occurred
+ */
+char *s_gets(char *str, int n) {
+    char *ret_val;
+    int i = 0;
+
+    ret_val = fgets(str, n, stdin);
+    if (ret_val) {
+        while (str[i] != '\n' && str[i] != '\0') {
+            i++;
+        }
+        if (str[i] == '\0') {
+            str[i] = '\0';
+        } else {
+            while (getchar() != '\n') {
+                continue;
+            }
+        }
+    }
+    return ret_val;
 }
