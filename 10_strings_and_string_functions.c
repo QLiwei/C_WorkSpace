@@ -16,6 +16,7 @@
 #include <math.h>
 #include <stdbool.h>  // _Bool bool
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -27,6 +28,10 @@
 char *s_gets(char *str, int n);
 void put1(const char *string);
 int put2(const char *string);
+void fit(char *string, size_t size);
+void stsrt(char *strings[], int num);
+void ToUpper(char *string);
+int PunctCount(const char *string);
 /* Private user code ---------------------------------------------------------*/
 
 /**
@@ -34,7 +39,7 @@ int put2(const char *string);
  *
  * @return int
  */
-int main(void) {
+int main(int argc, char *argv[]) {
     /**
      * @brief puts() -> #include <stdio.h>
      * puts()函数只显示字符串，而且自动在显示的字符串末尾加上换行符
@@ -346,7 +351,372 @@ int main(void) {
     put1(" as I could spend,\n");
     printf("I count %d characters.\n", put2("I never would cry chairs to mend."));
 #endif
+    /**
+     * @brief Function of string
+     *  string.h
+     *      strlen()/strcat()/strcmp()/strncmp()/strcpy()/strncpy()
+     * stdio.h
+     *  sprintf()
+     */
+
+    /**
+     * @brief strlen()
+     *
+     */
+#if 0
+    char mesg[] = "Things should be as simple as possible, but not simpler.";
+
+    puts(mesg);
+    fit(mesg, 38);
+    puts(mesg);
+    puts("Let's look at some more of the string.");
+    puts(mesg + 39);
+#endif
+/**
+ * @brief strcat()
+ *
+ */
+#if 0
+    char flower[80];
+    char addon[] = "s smell like old shoes.";
+
+    puts("What is your favorite flower?");
+    if (s_gets(flower, 80)) {
+        strcat(flower, addon);
+        puts(flower);
+        puts(addon);
+    } else {
+        puts("End of file encountered!");
+    }
+    puts("bye");
+#endif
+/**
+ * @brief strncat()
+ *
+ */
+#if 0
+    char flower[30];
+    char addon[] = "s smell like old shoes.";
+    char bug[13];
+    int available;
+
+    puts("What is your favorite flower?");
+    s_gets(flower, 30);
+    if ((strlen(addon) + strlen(flower) + 1) <= 30) {
+        strcat(flower, addon);
+    }
+    puts(flower);
+    puts("What is your favorite bug?");
+    s_gets(bug, 13);
+    available = 13 - strlen(bug) - 1;
+    strncat(bug, addon, available);
+    puts(bug);
+#endif
+/**
+ * @brief strcmp()
+ *
+ * @retval <0   前字符串 < 后面的字符串
+ * @retval 0    相等
+ * @retval >0   前字符串 > 后面的字符串
+ */
+#if 0
+    #define ANSWER "Grant"
+    #define SIZE   40
+    char try[SIZE];
+
+    puts("Who is buried in Grant's tomb?");
+    s_gets(try, SIZE);
+    while (strcmp(try, ANSWER) != 0)
+    {
+        puts("No, that's wrong. Try again.");
+        s_gets(try, SIZE);
+    }
+    puts("That's right!");
+
+#endif
+#if 0
+    #define SIZE 80
+    #define LIM  10
+    #define STOP "quit"
+
+    char input[LIM][SIZE];
+    int ct = 0;
+
+    printf("Enter up to %d lines (type quit to quit):\n", LIM);
+    while (ct < LIM && s_gets(input[ct], SIZE) != NULL && strcmp(input[ct], STOP) != 0) {
+        ct++;
+    }
+    printf("%d strings entered\n", ct);
+
+#endif
+/**
+ * @brief strncmp()
+ *
+ */
+#if 0
+    #define LISTSIZE 6
+    const char *list[LISTSIZE] = {"astronomy", "astounding", "astrophysics", "ostracize", "asterism", "astrophobia"};
+    int count = 0;
+    int i;
+
+    for (i = 0; i < LISTSIZE; i++) {
+        if (strncmp(list[i], "astro", 5) == 0) {
+            printf("Found: %s\n", list[i]);
+            count++;
+        }
+    }
+    printf("The list contained %d words beginning with astro.\n", count);
+#endif
+/**
+ * @brief strcpy() strncpy()
+ *
+ */
+#if 0
+    #define SIZE 40
+    #define LIM  5
+
+    char qwords[LIM][SIZE];
+    char temp[SIZE];
+    int i = 0;
+
+    printf("Enter %d words beginning with q:\n", LIM);
+    while (i < LIM && s_gets(temp, SIZE)) {
+        if (temp[0] != 'q') {
+            printf("%s doesn't begin with q!\n", temp);
+        } else {
+            strcpy(qwords[i], temp);
+            i++;
+        }
+    }
+    puts("Here are the words accepted:");
+    for (i = 0; i < LIM; i++) {
+        puts(qwords[i]);
+    }
+#endif
+#if 0
+    #define WORDS "beast"
+    #define SIZE  40
+
+    const char *orig = WORDS;
+    char copy[SIZE] = "Be the best that you can be.";
+    char *ps;
+
+    puts(orig);
+    puts(copy);
+    ps = strcpy(copy + 7, orig);
+    puts(copy);
+    puts(ps);
+#endif
+/**
+ * @brief strnpy()
+ *
+ */
+#if 0
+    #define SIZE     40
+    #define TARGSIZE 7
+    #define LIM      5
+
+    char qwords[LIM][TARGSIZE];
+    char temp[SIZE];
+
+    int i = 0;
+    printf("Enter %d words beginning with q:\n", LIM);
+    while (i < LIM && s_gets(temp, SIZE)) {
+        if (temp[0] != 'q') {
+            printf("%s doesn't begin with q!\n", temp);
+        } else {
+            strncpy(qwords[i], temp, TARGSIZE - 1);
+            qwords[i][TARGSIZE - 1] = '\0';
+            i++;
+        }
+    }
+    puts("Here are the words accepted:");
+    for (i = 0; i < LIM; i++) {
+        puts(qwords[i]);
+    }
+#endif
+/**
+ * @brief sprintf()
+ *
+ */
+#if 0
+    #define MAX 20
+
+    char first[MAX];
+    char last[MAX];
+    char formal[2 * MAX + 10];
+    double prize;
+
+    puts("Enter your first name:");
+    s_gets(first, MAX);
+    puts("Enter your last name:");
+    s_gets(last, MAX);
+    puts("Enter your prize money:");
+    scanf("%lf", &prize);
+    sprintf(formal, "%s, %-19s: $%6.2f\n", last, first, prize);
+    puts(formal);
+#endif
+/**
+ * @brief String sorting
+ *
+ */
+#if 0
+    #define SIZE 81
+    #define LIM  20
+    #define HALT " "
+
+    char input[LIM][SIZE];
+    char *ptstr[LIM];
+    int ct = 0;
+    int k;
+
+    printf("Input up to %d lines, and I will sort them.\n", LIM);
+    printf("To stop, press the Enter key at a line's start.\n");
+    while (ct < LIM && s_gets(input[ct], SIZE) != NULL && input[ct][0] != '\0') {
+        ptstr[ct] = input[ct];
+        ct++;
+    }
+    stsrt(ptstr, ct);
+    puts("\nHere's the sorted list:\n");
+    for (k = 0; k < ct; k++) {
+        puts(ptstr[k]);
+    }
+
+#endif
+/**
+ * @brief ctype.h character functions and strings
+ *
+ */
+#if 0
+    #define LIMIT 81
+
+    char line[LIMIT];
+    char *find;
+
+    puts("Please enter a line:");
+    fgets(line, LIMIT, stdin);
+    find = strchr(line, '\n');
+    if (find) {
+        *find = '\0';
+    }
+    ToUpper(line);
+    puts(line);
+    printf("That line has %d punctuation characters.\n", PunctCount(line));
+#endif
+/**
+ * @brief Command line parameter
+ *  int main(int argc, char *argv[]){}
+ *  int main(int argc, char **argv){}
+ * @param argc Number of strings in the command line (argument count)
+ * @param argv A pointer to a pointer(argument value)
+ *  argv[0] Representing the program itself
+ */
+#if 0
+    int count;
+
+    printf("The command line has %d arguments:\n", argc - 1);
+    for (count = 1; count < argc; count++) {
+        printf("%d: %s\n", count, argv[count]);
+    }
+    printf("\n");
+#endif
+/**
+ * @brief Converts a string to a number
+ *
+ */
+#if 0
+    int i, times;
+
+    if (argc < 2 || (times = atoi(argv[1])) < 1) {
+        printf("Usage: %s positive-number\n", argv[0]);
+    } else {
+        for (i = 0; i < times; i++) {
+            puts("Hello, good looking!");
+        }
+    }
+#endif
+
+#if 1
+    #define LIM 30
+    char number[LIM];
+    char *end;
+    long value;
+
+    puts("Enter a number (empty line to quit):");
+    while (s_gets(number, LIM) && number[0] != '\0') {
+        value = strtol(number, &end, 10);  // 10进制
+        printf("base 10 input, base 10 output: %ld, stopped at %s (%d)\n", value, end, *end);
+
+        value = strtol(number, &end, 16);  // 16进制
+        printf("base 16 input, base 10 output: %ld, stopped at %s (%d)\n", value, end, *end);
+
+        puts("Next number:");
+    }
+    puts("Bye!\n");
+
+#endif
     return 0;
+}
+
+/**
+ * @brief Converts a string to uppercase
+ *
+ * @param string String opinter
+ */
+void ToUpper(char *string) {
+    while (*string) {
+        *string++ = toupper(*string);
+    }
+}
+
+/**
+ * @brief Count the number of punctuation marks in a string
+ *
+ * @param string String opinter
+ * @return int The number of punctuation marks in a string
+ */
+int PunctCount(const char *string) {
+    int ct = 0;
+    while (*string) {
+        if (ispunct(*string)) {
+            ct++;
+        }
+        string++;
+    }
+    return ct;
+}
+
+/**
+ * @brief String selection sort
+ *
+ * @param strings String array pointer
+ * @param num Number of strings
+ */
+void stsrt(char *strings[], int num) {
+    char *temp;
+    int top, seek;
+
+    for (top = 0; top < num - 1; top++) {
+        for (seek = top + 1; seek < num; seek++) {
+            if (strcmp(strings[top], strings[seek]) > 0) {
+                temp = strings[top];
+                strings[top] = strings[seek];
+                strings[seek] = temp;
+            }
+        }
+    }
+}
+
+/**
+ * @brief Changing the string Length
+ *
+ * @param string String pointer
+ * @param size Set string length
+ */
+void fit(char *string, size_t size) {
+    if (strlen(string) > size) {
+        string[size] = '\0';
+    }
 }
 
 /**
@@ -394,7 +764,7 @@ char *s_gets(char *str, int n) {
         while (str[i] != '\n' && str[i] != '\0') {
             i++;
         }
-        if (str[i] == '\0') {
+        if (str[i] == '\n') {
             str[i] = '\0';
         } else {
             while (getchar() != '\n') {
