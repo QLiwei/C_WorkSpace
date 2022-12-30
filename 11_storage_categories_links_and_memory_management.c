@@ -18,12 +18,19 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
+int count = 0;
+static unsigned long int next = 1; /* 伪随机数种子*/
 /* Private function prototypes -----------------------------------------------*/
 void trystat(void);
+void report_count(void);
+unsigned int rand0(void);
+void srand1(unsigned int seed);
+int rollem(int sides);
 /* Private user code ---------------------------------------------------------*/
 
 /**
@@ -213,7 +220,122 @@ int main(int argc, char *argv[]) {
      * 除一个定义式声明外，其他声明都要使用extern关键字。而且只有定义式声明才能初始化变量。
      *
      */
+
+    /**
+     * @brief Store the class specifier
+     * keyword：auto registe static extern _Thread_local typedef
+     *
+     * auto说明符表明变量时自动存储期，只能用于块作用域的变量声明中。由于块中声明的变量本身就具有自动存储期
+     * 所以使用auto主要是为了明确表达要使用与外部变量同名的----------局部变量的意图
+     *
+     * register说明符也只用于块作用域的变量，它把变量归为寄存器存储类别，请求最快速度访问该变量。
+     * 同时还保护该变量地址不被获取。
+     *
+     * static说明符创建的对象具有静态存储期，载入程序时创建对象，当程序结束时对象消失，如果static用于文件作用域
+     * 声明，作用域受限于该文件，如果static用于块作用域声明，作用域则受限于该块。
+     * 块作用域的静态变量无链接。文件作用域的静态变量具有内部链接。
+     *
+     * extern说明符表明声明的变量定义在别处。如果包含extern的声明具有文件作用域。则引用的变量必须具有外部链接。
+     * 如果包含extern的声明具有块作用域，则引用的变量可能具有外部链接或内部链接
+     *
+     */
+#if 0
+    int value;
+    register int i;
+
+    printf("Enter a positive integer (0 to quit): ");
+    while (scanf("%d", &value) == 1 && value > 0) {
+        ++count;
+        for (i = value; i >= 0; i--) {
+            accumulate(i);
+        }
+        printf("Enter a positive integer (0 to quit): ");
+    }
+    report_count();
+
+#endif
+
+/**
+ * @brief Stores categories and functions
+ *  外部函数 静态函数
+ *  C99新增 内联函数
+ *
+ */
+
+/**
+ * @brief 随机数函数和静态变量
+ *
+ */
+#if 0
+    int count;
+
+    for (count = 0; count < 5; count++) {
+        printf("%d\n", rand0());
+    }
+#endif
+#if 0
+    int count;
+    unsigned seed;
+
+    printf("Please enter your choice for seed.\n");
+    while (scanf("%u", &seed) == 1) {
+        srand1(seed);
+        for (count = 0; count < 5; count++) {
+            printf("%d\n", rand0());
+        }
+        printf("Please enter next seed (q to quit):\n");
+    }
+    printf("Done\n");
+
+#endif
+
+    /**
+     * @brief rand()
+     * #include <stdlib.h>
+     *
+     *
+     */
+#if 1
+    int dice, roll;
+    int sides;
+    int status;
+
+    srand((unsigned int)time(0));  // 随机种子
+    printf("Enter the number of sides per die, 0 to stop.\n");
+    while (scanf("%d", &sides) == 1 && sides > 0) {
+        printf("Output the number of dice rolled\n");
+        scanf("%d", &dice);
+        for (int i = 0; i < dice; i++) {
+            printf("[1:%d]: %d\n", sides, rollem(sides));
+        }
+        printf("Please enter next sides (q to quit):\n");
+    }
+
+#endif
     return 0;
+}
+
+/**
+ * @brief Returns a random number[0:sides]
+ *
+ * @param sides Random number range[0:sides]
+ * @return int Random number from 0 to sides
+ */
+int rollem(int sides) {
+    return rand() % sides + 1;
+}
+
+unsigned int rand0(void) {
+    next = next * 1103515245 + 12345;
+    return (unsigned int)(next / 65536) % 32768;
+}
+
+void srand1(unsigned int seed) {
+    next = seed;
+}
+
+void report_count(void) {
+    printf("Loop executed %d times\n", count);
 }
 
 void trystat(void) {
