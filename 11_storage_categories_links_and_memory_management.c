@@ -295,7 +295,7 @@ int main(int argc, char *argv[]) {
      *
      *
      */
-#if 1
+#if 0
     int dice, roll;
     int sides;
     int status;
@@ -312,6 +312,57 @@ int main(int argc, char *argv[]) {
     }
 
 #endif
+/**
+ * @brief malloc() free()
+ *
+ * calloc()
+ * long * newmen;
+ * newmen = (long *)calloc(100, sizeof(long));
+ */
+#if 0
+    double *ptd;
+    int max;
+    int number;
+    int i = 0;
+    puts("What is the maximum number of type dpuble entries?");
+    if (scanf("%d", &max) != 1) {
+        puts("Number not correctly entered -- bye.");
+        exit(EXIT_FAILURE);
+    }
+    ptd = (double *)malloc(max * sizeof(double));
+    if (ptd == NULL) {
+        puts("Memory allocation failed. Goodbye.");
+        exit(EXIT_FAILURE);
+    }
+    puts("Enter the values (q to quit):");
+    while (i < max && scanf("%lf", &ptd[i]) == 1) {
+        ++i;
+    }
+    printf("Here are your %d entries:\n", number = i);
+    for (i = 0; i < number; i++) {
+        printf("%7.2f ", ptd[i]);
+        if (i % 7 == 6) {
+            putchar('\n');
+        }
+    }
+    if (i % 7 != 0) {
+        putchar('\n');
+    }
+    puts("Done.");
+    free(ptd);
+    if (ptd != NULL) {
+        ptd = NULL;
+    }
+
+#endif
+/**
+ * @brief Qualifier
+ *  const
+ *  volatile : 告知计算机，代理可以改变该变量的值（易变的）
+ *  restrict：允许编译器优化某部分代码以更好地支持计算，只能用于指针，表示该指针是访问数据对象的唯一且初始的方式
+ *
+ */
+
     return 0;
 }
 
