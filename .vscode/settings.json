@@ -1,6 +1,8 @@
 {
     "files.associations": {
         "math.h": "c",
-        "stdio.h": "c"
+        "stdio.h": "c",
+        "stdbool.h": "c",
+        "01_linke_list_adt.h": "c"
     }
 }
