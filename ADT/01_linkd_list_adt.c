@@ -57,11 +57,11 @@ void initialize_list(List *plist) {
 }
 
 /**
- * @brief
+ * @brief Whether the list is empty
  *
- * @param plist
- * @return true
- * @return false
+ * @param plist Points to a linked list
+ * @return true The linked list is empty
+ * @return false The list is not empty
  */
 bool list_is_empty(const List *plist) {
     if (*plist == NULL) {
@@ -72,11 +72,11 @@ bool list_is_empty(const List *plist) {
 }
 
 /**
- * @brief
+ * @brief Whether the linked list is full
  *
- * @param plist
- * @return true
- * @return false
+ * @param plist Points to a linked list
+ * @return true The linked list is full
+ * @return false The list is not full
  */
 bool list_is_full(const List *plist) {
     Node *pt;
@@ -94,10 +94,10 @@ bool list_is_full(const List *plist) {
 }
 
 /**
- * @brief
+ * @brief The number of entries in the list
  *
- * @param plist
- * @return unsigned int
+ * @param plist Points to a linked list
+ * @return unsigned int The number of entries in the list
  */
 unsigned int list_item_count(const List *plist) {
     unsigned int count = 0;
@@ -111,12 +111,12 @@ unsigned int list_item_count(const List *plist) {
 }
 
 /**
- * @brief
+ * @brief Want to add an item to the list
  *
  * @param item
- * @param plist
- * @return true
- * @return false
+ * @param plist Points to a linked list
+ * @return true successfully added
+ * @return false fail to add
  */
 bool add_item(Item item, List *plist) {
     Node *pnew;
@@ -140,6 +140,12 @@ bool add_item(Item item, List *plist) {
     return true;
 }
 
+/**
+ * @brief Manipulate an item in a linked list
+ *
+ * @param plist Points to a linked list
+ * @param pfun operating function
+ */
 void traverse(const List *plist, void(pfun)(Item item)) {
     Node *pnode = *plist;
 
@@ -149,6 +155,11 @@ void traverse(const List *plist, void(pfun)(Item item)) {
     }
 }
 
+/**
+ * @brief Clear linked list
+ *
+ * @param plist Points to a linked list
+ */
 void empty_the_list(List *plist) {
     Node *psave;
 
@@ -159,6 +170,12 @@ void empty_the_list(List *plist) {
     }
 }
 
+/**
+ * @brief Replication node
+ *
+ * @param item
+ * @param pnode Points to a linked list
+ */
 static void copy_to_node(Item item, Node *pnode) {
     pnode->item = item;
 }
