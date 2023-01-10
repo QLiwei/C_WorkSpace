@@ -66,7 +66,7 @@ int main(int argc, char *argv[]) {
                 enqueue(temp, &line);
             }
         }
-        if (wait_time <= 0 && queue_is_empty(&line)) {
+        if (wait_time <= 0 && !queue_is_empty(&line)) {
             dequeue(&temp, &line);
             wait_time = temp.processtime;
             line_wait += cycle - temp.processtime;
